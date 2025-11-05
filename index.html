@@ -1,34 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Support – Pig Dice Game</title>
-    <style>
-        body { background: #fff; color: #333; font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
-        h1 { font-size: 28px; margin-bottom: 20px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input[type="email"], textarea { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { margin-top: 20px; padding: 12px 20px; background: #6200EE; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
-        button:hover { background: #4500b8; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Support – Pig Dice Game</title>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("2uQF_kxSFmYpr73Bt"); // your public key
+    })();
+  </script>
+  <style>
+    body { background: #fff; color: #333; font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+    h1 { font-size: 28px; margin-bottom: 20px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input[type="email"], textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+    button { margin-top: 20px; padding: 12px 20px; background: #6200EE; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+    button:hover { background: #4500b8; }
+  </style>
 </head>
 <body>
 <h1>Support – Pig Dice Game</h1>
 <p>If you have a question about the game or the app, please fill out this form and I’ll get back to you. ✅</p>
 
-<form action="https://formsubmit.co/el/mutuya" method="POST">
-    <input type="hidden" name="_next" value="https://nullundvoidd.github.io/pig-dice-support/">
-    <label for="email">Your Email:</label>
-    <input type="email" id="email" name="email" required placeholder="you@example.com">
+<form id="contact-form">
+  <label for="email">Your Email:</label>
+  <input type="email" id="email" name="user_email" required placeholder="you@example.com">
 
-    <label for="message">Your Question:</label>
-    <textarea id="message" name="message" required placeholder="Type your question here..." rows="6"></textarea>
+  <label for="message">Your Question:</label>
+  <textarea id="message" name="message" required placeholder="Type your question here..." rows="6"></textarea>
 
-    <button type="submit">Send</button>
+  <button type="submit">Send</button>
 </form>
+
+<script>
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    emailjs.sendForm('service_z54l7ax', 'template_orbn1qe', this)
+      .then(() => {
+        alert('Message sent! ✅');
+        form.reset();
+      }, (err) => {
+            alert('Message failed to send.\n' + JSON.stringify(err));
+      });
+  });
+</script>
 </body>
 </html>
-
-
-
-
